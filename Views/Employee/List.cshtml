@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = " Employees List Page";
+}
+
+@model List<Employee>
+
+    <div class="text-center">
+        @foreach (var item in Model) {
+        <p>
+            <h1 class="display-4" style="color: red">@item.Id - @item.Name 
+            @*ekvivalentas href="Employee/Delete/<id number>*@
+                <a href="@Url.Action("Delete", "Employee" , new { ID=item.Id })">Delete</a>
+            </h1>
+        </p>
+        }
+    </div>
+
+
