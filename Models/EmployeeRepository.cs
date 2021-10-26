@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MvcApp2.Models
 {
-    public class EmployeeRepository
+    public class EmployeeRepository : IEmployeeRepository
     {
         private static List<Employee> _employees;
         public EmployeeRepository()
@@ -17,7 +17,7 @@ namespace MvcApp2.Models
             };
         }
 
-        public List<Employee> GetAll()
+        public IEnumerable<Employee> GetAll()
         {
             return _employees;
         }

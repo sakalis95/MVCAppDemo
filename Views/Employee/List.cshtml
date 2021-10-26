@@ -4,25 +4,71 @@
 
 @model List<Employee>
 
-    <div class="text-center">
-        @foreach (var item in Model) {
-        <p style="color: red">
-            @item.Id - @item.Name
-            @*ekvivalentas href="Employee/Delete/<id number>*@
-            <a href="@Url.Action("Delete", "Employee" , new { ID=item.Id })">Delete</a>
-            <a href="@Url.Action("Details", "Employee" , new { ID=item.Id })">Update</a>
-
-        </p>
+<style>
+    @@media only screen and (max-width: 768px) {
+        .narrower-screen {
+            display: block !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
         }
+}
+</style>
 
-        <hr />
-    <form method="post" asp-controller="Employee" asp-action="Create">
-        <label>
-            Name:
-        </label>
-        <input type="text" value="" name="name" />
-        <input type="submit" value=" Create Employee" name="submit" />
-    </form>
+<div class="d-flex justify-content-center narrower-screen ">
+    <div class="card p-3 m-4 container-fluid narrower-screen bg-dark" > 
+        <div class="card-body">
+            <table class="table table-striped table-dark">
+                <thead>
+                    <tr>
+                        <th class=" text-warning" scope="col">Id</th>
+                        <th class=" text-warning" scope="col">Name</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th class=" text-warning" scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var employee in Model)
+                    {
+                    <tr>
+                        <th scope="row">@employee.Id</th>
+                        <td>@employee.Name</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <a class="btn btn-danger" href="@Url.Action("Delete", "Employee" , new { ID=employee.Id })">Delete</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-primary" href="@Url.Action("Details", "Employee" , new { ID=employee.Id })">Update</a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+
+
+            </table>
+        </div>
+       
+    </div>
+    <div class="card p-3 m-4 narrower-screen bg-black" style="width: 22rem;">
+        <div class="card-body ">
+                <div class="card p-3 bg-dark">
+                    <form class="d-grid justify-content-center" method="post" asp-controller="Employee" asp-action="Create">
+                        <label class="mb-2 text-warning fw-bold">
+                            Name:
+                        </label>
+                        <input class="mb-2 bg-secondary" type="text" value="" name="name" style="width: 8rem;" />
+                        <button class="btn btn-success mb-2">Create <br /> Employee</button>
+                        <input type="hidden" value="" name="submit" />
+                    </form>
+
+
+            </div>
+
+
+        </div>
     </div>
 
-
+</div>

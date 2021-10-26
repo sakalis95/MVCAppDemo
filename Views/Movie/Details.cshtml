@@ -3,11 +3,13 @@
 <div class="text-center">
     @*<p>@Model.Id @Model.Name</p>*@
     <form method="post" asp-controller="Movie" asp-action="Update">
-        <input type="hidden" value="@Model.Id" name="id" />
-        <label>Name:</label>
-        <input type="text" value="@Model.Name" name="name" />
-        <input type="text" value="@Model.Year" name="year" />
-        <input type="text" value="@Model.Director" name="director" />
+        <input class="bg-secondary text-warning" type="hidden" value="@Model.Id" name="id" />
+        <label class="text-warning">Name:</label>
+        <input class="bg-secondary text-warning" type="text" value="@Model.Name" name="name" />
+        <label class="text-warning">Year:</label>
+        <input class="bg-secondary text-warning" type="text" value="@Model.Year" name="year" />
+        <label class="text-warning">Director:</label>
+        <input class="bg-secondary text-warning" type="text" value="@Model.Director" name="director" />
         <input type="submit" value="Update Movie" name="submit" />
     </form>
 </div>

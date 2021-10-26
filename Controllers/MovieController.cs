@@ -9,8 +9,8 @@ namespace MvcApp2.Controllers
 {
     public class MovieController : Controller
     {
-        private MovieRepository _movieRepository;
-        public MovieController(MovieRepository movieRepository)
+        private IMovieRepository _movieRepository;
+        public MovieController(IMovieRepository movieRepository)
         {
             _movieRepository = movieRepository;
         }
@@ -70,7 +70,8 @@ namespace MvcApp2.Controllers
         public IActionResult Update(int id, string name, int year, string director)
         {
             _movieRepository.Update(id, name, year, director);
-            return RedirectToAction("Details", new { id = id });
+
+            return RedirectToAction("List");
         }
     }
 }

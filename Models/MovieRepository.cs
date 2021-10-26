@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MvcApp2.Models
 {
-    public class MovieRepository
+    public class MovieRepository : IMovieRepository
     {
         private static List<Movie> _movies;
         public MovieRepository()
@@ -25,7 +25,7 @@ namespace MvcApp2.Models
             };
         }
 
-        public List<Movie> GetAll()
+        public IEnumerable<Movie> GetAll()
         {
             return _movies;
         }

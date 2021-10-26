@@ -6,10 +6,10 @@
     <title>@ViewData["Title"] - MvcApp2</title>
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-</head>
-<body>
+</head> 
+<body class="bg-black">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand red-items" asp-area="" asp-controller="Home" asp-action="Index">MvcApp2</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,34 +18,34 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between" id="navbarSupportedContent">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-warning" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-warning" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" style="color: red !important" asp-area="" asp-controller="Kebab" asp-action="Index">Interesting</a>
+                            <a class="nav-link text-warning"  asp-area="" asp-controller="Kebab" asp-action="Index">Interesting</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="List">Employees</a>
+                            <a class="nav-link text-warning" asp-area="" asp-controller="Employee" asp-action="List">Employees</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Movie" asp-action="List">Movies</a>
+                            <a class="nav-link text-warning" asp-area="" asp-controller="Movie" asp-action="List">Movies</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
-      
+
     </header>
-    <div class="container">
+    <div class="container>
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted bg-dark">
         <div class="container">
-            &copy; 2021 - MvcApp2 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; <script>document.write(new Date().getFullYear())</script> - MvcApp2 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
