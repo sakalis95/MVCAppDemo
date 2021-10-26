@@ -1,0 +1,13 @@
+﻿@{ ViewData["Title"] = "Details Page";}
+@model Movie
+<div class="text-center">
+    @*<p>@Model.Id @Model.Name</p>*@
+    <form method="post" asp-controller="Movie" asp-action="Update">
+        <input type="hidden" value="@Model.Id" name="id" />
+        <label>Name:</label>
+        <input type="text" value="@Model.Name" name="name" />
+        <input type="text" value="@Model.Year" name="year" />
+        <input type="text" value="@Model.Director" name="director" />
+        <input type="submit" value="Update Movie" name="submit" />
+    </form>
+</div>

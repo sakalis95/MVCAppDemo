@@ -27,6 +27,19 @@ namespace MvcApp2.Models
             var e = _employees.First(e => e.Id == id);
             return _employees.Remove(e);
         }
+        public void Create(string name)
+        {
+            _employees.Add(new Employee() { Id = _employees.Count() + 1, Name = name });
+        }
+        public Employee GetById(int id)
+        {
+            return _employees.First(e => e.Id == id);
+        }
+        public void Update(int updateableId, string updatedName)
+        {
+            var e = _employees.First(e => e.Id == updateableId);
+            e.Name = updatedName;
+        }
     }
 
 }

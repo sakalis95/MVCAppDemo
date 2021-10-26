@@ -7,29 +7,25 @@ using System.Threading.Tasks;
 
 namespace MvcApp2.Controllers
 {
-    public class EmployeeController : Controller
+    public class MovieController : Controller
     {
-        private EmployeeRepository _employeeRepository;
-        public EmployeeController(EmployeeRepository employeeRepository)
+        private MovieRepository _movieRepository;
+        public MovieController(MovieRepository movieRepository)
         {
-            _employeeRepository = employeeRepository;
+            _movieRepository = movieRepository;
         }
+                
+        //public IActionResult Index()
+        //{
+        //    //Some/Index.cshtml
+        //    //return View();
 
-        public string MyMethod()
-        {
-            return "I pink up the phone and say yellow!";
-        }
-        public IActionResult Index()
-        {
-            //Some/Index.cshtml
-            //return View();
-
-            //galima issikviesti ir is home 
-            return View("~/Views/Kebab/Index.cshtml");
-        }
+        //    //galima issikviesti ir is home 
+        //    return View("~/Views/Kebab/Index.cshtml");
+        //}
         public IActionResult List()
         {
-            return View(_employeeRepository.GetAll());
+            return View(_movieRepository.GetAll());
         }
         public IActionResult Delete(int? id)
         {
@@ -43,7 +39,7 @@ namespace MvcApp2.Controllers
             //    return NotFound();
             
             //ternary version
-            return (id == null || !_employeeRepository.DeleteById((int)id))
+            return (id == null || !_movieRepository.DeleteById((int)id))
                 ? NotFound()
                 : RedirectToAction("List");
 
@@ -60,20 +56,20 @@ namespace MvcApp2.Controllers
             //    return NotFound(); //404
             //}
         }
-        public IActionResult Create(string name)
+        public IActionResult Create(string name, int year, string director)
         {
-            _employeeRepository.Create(name);
+            _movieRepository.Create(name, year, director);
             return RedirectToAction("List");
         }
         public IActionResult Details(int? id)
         {
             return id == null
                     ? NotFound()
-                    : View(_employeeRepository.GetById((int)id));
+                    : View(_movieRepository.GetById((int)id));
         }
-        public IActionResult Update(int id, string name)
+        public IActionResult Update(int id, string name, int year, string director)
         {
-            _employeeRepository.Update(id, name);
+            _movieRepository.Update(id, name, year, director);
             return RedirectToAction("Details", new { id = id });
         }
     }

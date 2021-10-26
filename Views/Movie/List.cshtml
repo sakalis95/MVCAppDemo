@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Movies List Page";
+}
+
+@model List<Movie>
+
+    <div class="text-center">
+        @foreach (var item in Model) {
+        <p style="color: red">
+            @item.Id - @item.Name - @item.Year - @item.Director
+            @*ekvivalentas href="Employee/Delete/<id number>*@
+            <a href="@Url.Action("Delete", "Movie" , new { ID=item.Id })">Delete</a>
+            <a href="@Url.Action("Details", "Movie" , new { ID=item.Id })">Update</a>
+
+        </p>
+        }
+
+        <hr />
+        <form method="post" asp-controller="Movie" asp-action="Create">
+            <label>
+                Name:
+            </label>
+            <input type="text" value="" name="name" />
+            <label>
+                Year:
+            </label>
+            <input type="number" value="" name="year" />
+            <label>
+                Director:
+            </label>
+            <input type="text" value="" name="director" />
+            <input type="submit" value=" Create Employee" name="submit" />
+        </form>
+    </div>
+
+
