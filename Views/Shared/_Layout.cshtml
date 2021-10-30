@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -6,12 +8,12 @@
     <title>@ViewData["Title"] - MvcApp2</title>
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-</head> 
+</head>
 <body class="bg-black">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand red-items" asp-area="" asp-controller="Home" asp-action="Index">MvcApp2</a>
+                <a class="navbar-brand red-items text-primary" asp-area="" asp-controller="Home" asp-action="Index">'ntellio</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -24,14 +26,21 @@
                             <a class="nav-link text-warning" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-warning"  asp-area="" asp-controller="Kebab" asp-action="Index">Interesting</a>
+                            <a class="nav-link text-warning" asp-area="" asp-controller="Kebab" asp-action="Index">Interesting</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-warning" asp-area="" asp-controller="Employee" asp-action="List">Employees</a>
-                        </li>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-warning" asp-area="" asp-controller="Employee" asp-action="List">Employees</a>
+                            </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link text-warning" asp-area="" asp-controller="Movie" asp-action="List">Movies</a>
                         </li>
+                        <li class="text-warning">
+                            <partial name="_LoginPartial" />
+                        </li>
+
                     </ul>
                 </div>
             </div>
@@ -45,7 +54,8 @@
     </div>
     <footer class="border-top footer text-muted bg-dark">
         <div class="container">
-            &copy; <script>document.write(new Date().getFullYear())</script> - MvcApp2 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy;
+            <script>document.write(new Date().getFullYear())</script> - MvcApp2 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>

@@ -22,7 +22,7 @@ namespace MvcApp2.Models
             return _employees;
         }
 
-        public bool DeleteById(int? id)
+        public bool DeleteById(int id)
         {
             var e = _employees.First(e => e.Id == id);
             return _employees.Remove(e);

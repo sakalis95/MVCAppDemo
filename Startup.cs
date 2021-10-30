@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
@@ -26,12 +28,37 @@ namespace MvcApp2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //For instant updates
             services.AddLiveReload();
+
+            //loginai
+            services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppDbContext>();
+
+
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+            //local data
             //services.AddSingleton(new EmployeeRepository());
-            services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
+            //adding interface
+            //services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
+            // database data, reikia scoped
+            services.AddScoped<IEmployeeRepository, EmployeeDbRepository>();
+
+            // local movies data
             //services.AddSingleton(new MovieRepository());
-            services.AddSingleton<IMovieRepository, MovieRepository>();
+            // adding interface
+            //services.AddSingleton<IMovieRepository, MovieRepository>();
+            // dtaabase datda reikia scoped
+            services.AddScoped<IMovieRepository, MovieDbRepository>();
+
+            //login
+            services.AddRazorPages();
+
+            //adding DB conncetion
+            services.AddDbContext<AppDbContext>(options =>
+               options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+           );
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,27 +66,46 @@ namespace MvcApp2
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                //eiliskumas svarbu
                 app.UseLiveReload();
+                app.UseDeveloperExceptionPage();
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            //code base migration - nerekomenduojama praktika. Geriau naudoti kontroliuojamas migracijas
+            //using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            //{
+            //    var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
+            //    context.Database.Migrate();
+            //}
+
+            // wwwroot files standard
             app.UseStaticFiles();
+            // static files (styling) in custom folder
             //app.UseStaticFiles(new StaticFileOptions
             //{
             //    FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "MyStaticFolder")),
             //});
+
+            app.UseAuthentication();
             app.UseRouting();
             app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                //login
+                endpoints.MapRazorPages();
             });
 
+
+            //  nepamenu
             //app.UseRouting();
             //app.UseEndpoints(endpoints =>
             //{

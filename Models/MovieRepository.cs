@@ -30,7 +30,7 @@ namespace MvcApp2.Models
             return _movies;
         }
 
-        public bool DeleteById(int? id)
+        public bool DeleteById(int id)
         {
             var m = _movies.First(m => m.Id == id);
             return _movies.Remove(m);

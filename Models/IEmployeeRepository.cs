@@ -10,7 +10,7 @@ namespace MvcApp2.Models
         IEnumerable<Employee> GetAll();
 
 
-        bool DeleteById(int? id);
+        bool DeleteById(int id);
 
         void Create(string name);
 

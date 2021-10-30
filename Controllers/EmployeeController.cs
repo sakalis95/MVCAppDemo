@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MvcApp2.Models;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace MvcApp2.Controllers
 {
+    [Authorize]
     public class EmployeeController : Controller
     {
         private IEmployeeRepository _employeeRepository;
@@ -31,6 +33,8 @@ namespace MvcApp2.Controllers
         {
             return View(_employeeRepository.GetAll());
         }
+
+        [Authorize]
         public IActionResult Delete(int? id)
         {
             //if(id == null)

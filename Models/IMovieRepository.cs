@@ -10,7 +10,7 @@ namespace MvcApp2.Models
 
         IEnumerable<Movie> GetAll();
 
-        bool DeleteById(int? id);
+        bool DeleteById(int id);
 
         void Create(string name, int year, string director);
 
