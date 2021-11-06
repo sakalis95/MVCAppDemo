@@ -3,61 +3,75 @@
 }
 
 @model List<Employee>
-
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
 
 
 
 <div class="d-flex align-items-center justify-content-center narrower-screen ">
-        <div class="p-3 m-4 container-fluid narrower-screen panel-styling" >
-            <div class="card-body">
-                <table class="table table-borderless table-striped panel-styling">
-                    <thead>
-                        <tr>
-                            <th class="" scope="col">Id</th>
-                            <th class="" scope="col">Name</th>
-                            <th></th>
-                            <th class="" scope="col">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var employee in Model)
+    <div class="p-3 m-4 container-fluid narrower-screen panel-styling">
+        <div class="card-body">
+            <table class="table table-borderless table-striped panel-styling">
+                <colgroup>
+                    <col span="1" style="width: 25%" />
+                    <col span="1" style="width: 60%" />
+                    <col span="1" style="width: 15%" />
+
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th class="" scope="col">Id</th>
+                        <th class="" scope="col">Name</th>
+                        <th class="" scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var employee in Model)
                         {
-                        <tr>
-                            <th scope="row">@employee.Id</th>
-                            <td class="">@employee.Name</td>
-                            <td></td>
-                            <td>
-                                <a class="button table-button" href="@Url.Action("Delete", "Employee" , new { ID=employee.Id })">Delete</a>
-                            </td>
-                            <td>
-                                <a class="button table-button" href="@Url.Action("Details", "Employee" , new { ID=employee.Id })">Update</a>
-                            </td>
-                        </tr>
+                    <tr>
+                        <th scope="row">@employee.Id</th>
+                        <td class="">@employee.Name</td>
+                        <td>
+                            <a class="button table-button" href="@Url.Action("Details", "Employee" , new { ID=employee.Id })">Update</a>
+                        </td>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                        <td>
+                            <a class="button table-button" href="@Url.Action("Delete", "Employee" , new { ID=employee.Id })">Delete</a>
+                        </td>
                         }
-                    </tbody>
+                        else
+                        {
+                        <td>
+                            <a class="button table-button disabled-not-user" href="@Url.Action("Delete", "Employee" , new { ID=employee.Id })">Delete</a>
+                        </td>
+                        }
+                    </tr>
+                        }
+                </tbody>
 
 
-                </table>
+            </table>
+        </div>
+
+    </div>
+    <div class="p-3 m-4 narrower-screen ">
+        <div class="card-body justify-content-center">
+            <div class=" p-5 panel-styling">
+                <form class="d-flex flex-column align-items-center justify-content-center" method="post" asp-controller="Employee" asp-action="Create">
+                    <label class="mb-2 fw-bold label">
+                        Name:
+                    </label>
+                    <input class="mb-2 panel-styling input-field" type="text" value="" name="name" />
+                    <button class="button table-button mt-3">Create Employee</button>
+                    <input type="hidden" value="" name="submit" />
+                </form>
+
+
             </div>
 
+
         </div>
-        <div class="p-3 m-4 narrower-screen ">
-            <div class="card-body justify-content-center">
-                    <div class=" p-5 panel-styling">
-                        <form class="d-flex flex-column align-items-center justify-content-center" method="post" asp-controller="Employee" asp-action="Create">
-                            <label class="mb-2 fw-bold label">
-                                Name:
-                            </label>
-                            <input class="mb-2 panel-styling input-field" type="text" value="" name="name" />
-                            <button class="button table-button mt-3">Create Employee</button>
-                            <input type="hidden" value="" name="submit" />
-                        </form>
-
-
-                </div>
-
-
-            </div>
-        </div>
+    </div>
 </div>
 

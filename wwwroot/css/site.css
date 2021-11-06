@@ -178,7 +178,10 @@ h2 {
 a.disabled {
     pointer-events: none;
     cursor: default;
+}
+.disabled-not-user, a.disabled {
     font-style: italic;
+    color: grey;
 }
 html, body {
     margin: 0;
@@ -264,6 +267,9 @@ html, body {
 .label{
     font-size:2.5rem;
 }
+
+
+
 
 
 /*to show tables coreectly in smaller screens*/

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MvcApp2.Models;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,7 @@ namespace MvcApp2.Controllers
         {
             return View(_movieRepository.GetAll());
         }
+        [Authorize]
         public IActionResult Delete(int? id)
         {
             //if(id == null)

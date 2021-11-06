@@ -1,6 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Movies List Page";
 }
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
 
 @model List<Movie>
 
@@ -28,41 +30,50 @@
                 <tbody>
                     @foreach (var movie in Model)
                     {
-                        <tr>
-                            <th scope="row">@movie.Id</th>
-                            <td>@movie.Name</td>
-                            <td>@movie.Year</td>
-                            <td>@movie.Director</td>
+                    <tr>
+                        <th scope="row">@movie.Id</th>
+                        <td>@movie.Name</td>
+                        <td>@movie.Year</td>
+                        <td>@movie.Director</td>
+                        <td>
+                            <a class="button table-button" href="@Url.Action("Details", "Movie" , new { ID=movie.Id })">Update</a>
+                        </td>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
                             <td>
-                                <a class="button table-button" href="@Url.Action("Details", "Movie" , new { ID=movie.Id })">Update</a>
+                                <a class="button table-button" href="@Url.Action("Delete", "Movie", new { ID = movie.Id })">Delete</a>
                             </td>
-                            <td>
-                                <a class="button table-button" href="@Url.Action("Delete", "Movie" , new { ID=movie.Id })">Delete</a>
-                            </td>
-                        </tr>
+                        }
+                        else
+                        {
+                    <td>
+                        <a class="button table-button disabled-not-user" href="@Url.Action("Delete", "Movie", new { ID = movie.Id })">Delete</a>
+                    </td>
+                        }
+                    </tr>
                     }
 
-                <tr>
-                    <form method="post" asp-controller="Movie" asp-action="Create">
-                    <td scope="row">
-                    </td>
-                    <td>
-                        <input class="panel-styling input-field " type="text" value="" name="name" placeholder="Name"/ style="width: 100%">
-                    </td>
-                    <td>
-                        <input class="panel-styling input-field " type="number" value="" name="year" placeholder="Year" style="width: 100%"/>
-                    </td>
-                    <td>
-                        <input class="panel-styling input-field " type="text" value="" name="director" placeholder="Director"/ style="width: 100%">
-                    </td>
-                    <td class="text-center" colspan="2">
-                        <button class="button table-button px-5">Save</button>
-                        <input type="hidden" value="" name="submit" />
-                    </td>
+                    <tr>
+                        <form method="post" asp-controller="Movie" asp-action="Create">
+                        <td scope="row">
+                        </td>
+                        <td>
+                            <input class="panel-styling input-field " type="text" value="" name="name" placeholder="Name" style="width: 100%"/>
+                        </td>
+                        <td>
+                            <input class="panel-styling input-field " type="number" value="" name="year" placeholder="Year" style="width: 100%" />
+                        </td>
+                        <td>
+                            <input class="panel-styling input-field " type="text" value="" name="director" placeholder="Director" style="width: 100%"/>
+                        </td>
+                        <td class="text-center" colspan="2">
+                            <button class="button table-button px-5">Save</button>
+                            <input type="hidden" value="" name="submit" />
+                        </td>
 
-                    </form>
+                        </form>
 
-                </tr>
+                    </tr>
                 </tbody>
 
 
