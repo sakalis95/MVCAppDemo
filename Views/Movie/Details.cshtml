@@ -1,15 +1,21 @@
 ﻿@{ ViewData["Title"] = "Details Page";}
 @model Movie
-<div class="text-center">
-    @*<p>@Model.Id @Model.Name</p>*@
-    <form method="post" asp-controller="Movie" asp-action="Update">
-        <input class="bg-secondary text-warning" type="hidden" value="@Model.Id" name="id" />
-        <label class="text-warning">Name:</label>
-        <input class="bg-secondary text-warning" type="text" value="@Model.Name" name="name" />
-        <label class="text-warning">Year:</label>
-        <input class="bg-secondary text-warning" type="text" value="@Model.Year" name="year" />
-        <label class="text-warning">Director:</label>
-        <input class="bg-secondary text-warning" type="text" value="@Model.Director" name="director" />
-        <input type="submit" value="Update Movie" name="submit" />
-    </form>
+
+
+<div class="p-3 m-4 narrower-screen">
+    <div class="card-body justify-content-center">
+        <div class=" p-5 panel-styling">
+            @*<p>@Model.Id @Model.Name</p>*@
+            <form class="d-flex flex-column align-items-center justify-content-center" method="post" asp-controller="Movie" asp-action="Update">
+                <input type="hidden" value="@Model.Id" name="id" />
+                <label class="mb-2 fw-bold label">Name:</label>
+                <input class="mb-2 panel-styling input-field" type="text" value="@Model.Name" name="name" />
+                <label class="mb-2 fw-bold label">Year:</label>
+                <input class="mb-2 panel-styling input-field" type="number" value="@Model.Year" name="year">
+                <label class="mb-2 fw-bold label">Director:</label>
+                <input class="mb-2 panel-styling input-field"  type="text" value="@Model.Director" name="director" >
+                <input class="button table-button mt-3" type="submit" value="Update Movie" name="submit" />
+            </form>
+        </div>
+    </div>
 </div>

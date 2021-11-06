@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MvcApp2.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class EmployeeController : Controller
     {
         private IEmployeeRepository _employeeRepository;

@@ -35,7 +35,7 @@ namespace MvcApp2
             services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppDbContext>();
 
 
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddControllersWithViews().AddViewOptions(opts => opts.HtmlHelperOptions.ClientValidationEnabled = false).AddRazorRuntimeCompilation();
 
             //local data
             //services.AddSingleton(new EmployeeRepository());

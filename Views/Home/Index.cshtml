@@ -1,8 +1,72 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    Layout = null;
 }
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My first C# app</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
 
-<div class="text-center">
-    <h1 class="display-4 text-white">My tests</h1>
-    <p class="text-warning">Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+</head>
+<style>
+@@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk&display=swap");
+</style>
+<body class="bg">
+    <section id="content">
+        <section class="panel-styling panel-dimentions panel-alignemnt">
+            <h2>Employees</h2>
+            <div class="card__text">
+                <p>Here is a list of emplyees you can modify, connceted to the database</p>
+            </div>
+            <a class="nav-link button" asp-area="" asp-controller="Employee" asp-action="List">Employees</a>
+        </section>
+        <section class="panel-styling panel-dimentions panel-alignemnt">
+            <h2>Movies</h2>
+            <div class="card__text">
+                <p>Here is a list of movies I really recommend. Only registered people can edit the list, though you can add your suggestions as well.</p>
+            </div>
+            <a class='button' asp-area="" asp-controller="Movie" asp-action="List">Movies</a>
+        </section>
+        <section class="panel-styling panel-dimentions panel-alignemnt">
+            <h2>Webscraping</h2>
+            <div class="card__text">
+                <p>I am planning to implement some webscraping functionality here. Please wait to see it.</p>
+            </div>
+            <a href="#" class='button disabled' action="disabled">Webscraping</a>
+        </section>
+        <section class="panel-styling panel-dimentions panel-alignemnt">
+            <h2>Project</h2>
+            <div class="card__text">
+                <p>Here will be my first production project in GitHub. I am looking forward to sharing it with you.</p>
+            </div>
+            <a href="#" class='button disabled'>Project</a>
+        </section>
+    </section>
+    <div id="footer">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <div class="container">
+                &copy;
+                <script>document.write(new Date().getFullYear())</script> - 'ntellio - <a class="footer-link" asp-area="Identity" asp-page="/Account/Logout">Logout</a>
+            </div>
+        }
+        else
+        {
+
+            <div class="container">
+                &copy;
+                <script>document.write(new Date().getFullYear())</script> - 'ntellio - <a class="footer-link" asp-area="Identity" asp-page="/Account/Login">Login</a> -
+                <a id="footer-link" class="footer-link" asp-area="Identity" asp-page="/Account/Register">Register</a>
+            </div>
+        }
+    </div>
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
